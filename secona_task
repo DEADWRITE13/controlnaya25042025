@@ -1,0 +1,37 @@
+class BankAccount:
+    def __init__(self, initial_balance=0):
+        self.__balance = initial_balance
+
+    def deposit(self, amount):
+        if amount > 0:
+            self.__balance += amount
+            print(f"Внесено {amount}. Новый баланс: {self.__balance}")
+        else:
+            print("Сумма должна быть положительной.")
+    def withdraw(self, amount):
+        if amount > 0:
+            if amount <= self.__balance:
+                self.__balance -= amount
+                print(f"Снято {amount}. Новый баланс: {self.__balance}")
+            else:
+                print("Недостаточно средств.")
+        else:
+            print("Сумма снятия должна быть положительной.")
+    def get_balance(self):
+        return self.__balance
+    def set_balance(self, new_balance):
+        if isinstance(new_balance, (int, float)):
+            self.__balance = new_balance
+            print(f"Баланс изменен на {new_balance}")
+        else:
+            print("Ошибка: Баланс должен быть числом.")
+    balance = property(get_balance, set_balance)
+account = BankAccount(100)
+print(f" баланс: {account.balance}")
+account.deposit(50)
+account.withdraw(20)
+print(f" баланс: {account.balance}")
+account.withdraw(200)
+print(f" баланс: {account.balance}")
+account.balance = 500
+print(f" баланс: {account.balance}")
